@@ -1,0 +1,24 @@
+2023-07-24 15:54:40,729 - root - INFO - test title
+2023-07-24 15:56:47,862 - root - INFO - test title
+2023-07-24 16:46:45,597 - root - INFO - test text of title
+2023-07-24 16:46:50,091 - root - INFO - test font size of title
+2023-07-24 16:47:11,165 - root - INFO - test text of title
+2023-07-24 16:47:13,602 - root - INFO - test font size of title
+2023-07-24 16:48:48,575 - root - INFO - test text of title
+2023-07-24 16:48:50,779 - root - INFO - test font size of title
+2023-07-24 16:49:08,291 - root - INFO - test text of title
+2023-07-24 16:49:10,417 - root - INFO - test font size of title
+2023-07-24 16:51:57,152 - root - INFO - test text of title
+2023-07-24 16:51:59,733 - root - INFO - test font size of title
+2023-07-24 16:52:01,691 - root - INFO - test font size of title
+2023-07-24 16:52:17,938 - root - INFO - test text of title
+2023-07-24 16:52:20,124 - root - INFO - test font size of title
+2023-07-24 16:52:22,102 - root - INFO - test font size of title
+2023-07-24 17:21:35,736 - root - INFO - test flow 1: Test clicking Login without filling all fields
+2023-07-24 17:22:00,261 - root - INFO - test flow 1: Test clicking Login without filling all fields
+2023-07-24 17:22:58,820 - root - INFO - test flow 1: Test clicking Login without filling all fields
+2023-07-24 17:57:26,397 - root - INFO - test flow 2: Test clicking Login after filling all fields
+2023-07-24 17:59:21,493 - root - INFO - test flow 2: Test clicking Login after filling all fields
+2023-07-24 17:59:50,188 - root - INFO - test flow 2: Test clicking Login after filling all fields
+2023-07-25 15:21:12,609 - root - INFO - test flow 2: Test clicking Login after filling all fields
+2023-07-25 15:21:56,613 - root - INFO - test flow 2: Test clicking Login after filling all fields
