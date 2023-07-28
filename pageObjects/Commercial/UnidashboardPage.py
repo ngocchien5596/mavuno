@@ -211,3 +211,14 @@ class UnidashboardPage:
     def setPipeline(self, pipelineValue):
         select = Select(self.driver.find_element(By.XPATH, self.droplist_pipeline_xpath))
         select.select_by_value(pipelineValue)
+
+    def getProjectName(self):
+        tr_xpath = "//div[contains(@class,'unidashboard-projects')]//tbody//tr"
+        max = len(self.driver.find_elements(By.XPATH, tr_xpath))
+        print('max: ', max)
+        list_projectName = []
+        for i in range(0, max):
+            span_xpath = "//div[contains(@class,'unidashboard-projects')]//tbody//tr[" + str(i + 1) + "]//span[contains(@class,'name')]"
+            list_projectName.append((self.driver.find_element(By.XPATH, span_xpath).text).split(" | "))
+        names = [x[0] for x in list_projectName]
+        return names

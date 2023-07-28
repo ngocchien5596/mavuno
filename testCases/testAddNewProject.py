@@ -12,7 +12,7 @@ class Test_AddNewProject:
     password = ReadConfig.getPassword()
 
     #Project info to create
-    projectName = "Chien test auto 1"
+    projectName = "Chien test auto 4"
     client = "MOA"
     country = "Vietnam"
     valueChain = "wheat"
@@ -125,17 +125,10 @@ class Test_AddNewProject:
         self.uni.searchProject(self.projectName)
         self.uni.setPipeline(self.pipelineValue)
         time.sleep(4)
-        tr_xpath = "//div[contains(@class,'unidashboard-projects')]//tbody//tr"
-        max = len(self.driver.find_elements(By.XPATH,tr_xpath))
-        print('max: ', max)
-        list_projectName = []
-        for i in range (0,max):
-            span_xpath = "//div[contains(@class,'unidashboard-projects')]//tbody//tr["+str(i+1)+"]//span[contains(@class,'name')]"
-            list_projectName.append((self.driver.find_element(
-                By.XPATH, span_xpath).text).split(" | "))
-        names = [x[0] for x in list_projectName]
-        print(list_projectName)
+        names = self.uni.getProjectName()
         print(names)
+
+        #Compare the search result
         if self.projectName in names:
             assert True
             self.driver.close()
