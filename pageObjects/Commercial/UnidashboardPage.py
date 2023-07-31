@@ -3,10 +3,11 @@ import time
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
+from Configurations.locators import UnidashboardLocators
 
 
 class UnidashboardPage:
-    commercial_xpath = "(//div[contains(text(),'Commercial')])"
+    # commercial_xpath = UnidashboardLocators.commercial_xpath
     unidashboard_xpath = "(//span[normalize-space()='Unidashboard'])"
     button_addNew_xpath = "(//span[normalize-space()='+ Add new'])"
     textbox_programName_xpath = "(//input[@placeholder='Enter new program name'])"
@@ -46,112 +47,112 @@ class UnidashboardPage:
         self.driver = driver
 
     def clickCommercial (self):
-        element = WebDriverWait(self.driver,20).until(EC.element_to_be_clickable((By.XPATH,self.commercial_xpath)))
+        element = WebDriverWait(self.driver,20).until(EC.element_to_be_clickable((By.XPATH, UnidashboardLocators.commercial_xpath)))
         element.click()
         # self.driver.find_element(By.XPATH,self.commercial_xpath).click()
 
     def clickUnidashboard (self):
-        element = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, self.unidashboard_xpath)))
+        element = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, UnidashboardLocators.unidashboard_xpath)))
         element.click()
         # self.driver.find_element(By.XPATH,self.unidashboard_xpath).click()
 
     def clickAddNew (self):
-        element = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, self.button_addNew_xpath)))
+        element = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, UnidashboardLocators.button_addNew_xpath)))
         element.click()
         # self.driver.find_element(By.XPATH,self.button_addNew_xpath).click()
 
     def setProgramName (self, programName):
-        self.driver.find_element(By.XPATH, self.textbox_programName_xpath).send_keys(programName)
+        self.driver.find_element(By.XPATH, UnidashboardLocators.textbox_programName_xpath).send_keys(programName)
 
     def setClient (self, client):
-        self.driver.find_element(By.XPATH, self.textbox_client_xpath).send_keys(client)
+        self.driver.find_element(By.XPATH, UnidashboardLocators.textbox_client_xpath).send_keys(client)
 
     def setCountry(self, country):
         value_country_xpath = "(//div[contains(@class, 'modal-row') and contains(., 'Country')]//div[contains(@class, 'mavuno-searchable-selector')]//div[contains(@class, 'dropdown-menu')]//div[contains(@class,'dropdown-content')]//a[contains(@class,'dropdown-item')]//span)"
-        self.driver.find_element(By.XPATH, self.droplist_country_xpath).click()
+        self.driver.find_element(By.XPATH, UnidashboardLocators.droplist_country_xpath).click()
         time.sleep(1)
-        self.driver.find_element(By.XPATH, self.droplist_country_xpath).send_keys(country)
+        self.driver.find_element(By.XPATH, UnidashboardLocators.droplist_country_xpath).send_keys(country)
         time.sleep(1)
         self.driver.find_element(By.XPATH, value_country_xpath).click()
         time.sleep(1)
 
     def setValueChanin(self, valueChain):
         value_valueChain_xpath = "//div[contains(@class,'modal-row') and contains(.,'Value chain')]//a[contains(@class,'dropdown-item')]//span"
-        self.driver.find_element(By.XPATH, self.droplist_valueChain_xpath).send_keys(valueChain)
+        self.driver.find_element(By.XPATH, UnidashboardLocators.droplist_valueChain_xpath).send_keys(valueChain)
         time.sleep(1)
         self.driver.find_element(By.XPATH, value_valueChain_xpath).click()
         time.sleep(1)
 
     def setFirstPlantingDate(self,date):
-        self.driver.find_element(By.XPATH, self.datepicker_plantingDate_xpath).click()
+        self.driver.find_element(By.XPATH, UnidashboardLocators.datepicker_plantingDate_xpath).click()
         time.sleep(1)
-        self.driver.find_element(By.XPATH, self.button_plantingDate_paginationNext_xpath).click()
+        self.driver.find_element(By.XPATH, UnidashboardLocators.button_plantingDate_paginationNext_xpath).click()
         time.sleep(1)
         value_datepicker_plantingDate_xpath = "//a[contains(@class,'datepicker-cell is-selectable')]//span[contains(.,'"+date+"')]"
         self.driver.find_element(By.XPATH, value_datepicker_plantingDate_xpath).click()
         time.sleep(1)
 
     def setFirstHarvestDate(self,date):
-        self.driver.find_element(By.XPATH, self.datepicker_harvestDate_xpath).click()
+        self.driver.find_element(By.XPATH, UnidashboardLocators.datepicker_harvestDate_xpath).click()
         time.sleep(1)
-        self.driver.find_element(By.XPATH, self.button_harvestDate_paginationNext_xpath).click()
+        self.driver.find_element(By.XPATH, UnidashboardLocators.button_harvestDate_paginationNext_xpath).click()
         time.sleep(1)
         value_datepicker_harvestDate_xpath = "//div[contains(@class,'modal-row') and contains(.,'First harvest date')]//a[contains(@class,'datepicker-cell is-selectable')]//span[contains(.,'"+date+"')]"
         self.driver.find_element(By.XPATH, value_datepicker_harvestDate_xpath).click()
         time.sleep(1)
 
     def setExpectedInvoiceDate(self,date):
-        self.driver.find_element(By.XPATH, self.datepicker_expectedInvoiceDate_xpath).click()
+        self.driver.find_element(By.XPATH, UnidashboardLocators.datepicker_expectedInvoiceDate_xpath).click()
         time.sleep(1)
-        self.driver.find_element(By.XPATH, self.button_expectedInvoiceDate_paginationNext_xpath).click()
+        self.driver.find_element(By.XPATH, UnidashboardLocators.button_expectedInvoiceDate_paginationNext_xpath).click()
         time.sleep(1)
         value_datepicker_expectedInvoiceDate_xpath = "//div[contains(@class,'modal-row') and contains(.,'Expected invoice date')]//a[contains(@class,'datepicker-cell is-selectable')]//span[contains(.,'"+date+"')]"
         self.driver.find_element(By.XPATH, value_datepicker_expectedInvoiceDate_xpath).click()
         time.sleep(1)
 
     def clickNext(self):
-        self.driver.find_element(By.XPATH, self.button_next_xpath).click()
+        self.driver.find_element(By.XPATH, UnidashboardLocators.button_next_xpath).click()
 
     def setAge(self, age):
-        self.driver.find_element(By.XPATH, self.textbox_ageOfProgram_xpath).send_keys(age)
+        self.driver.find_element(By.XPATH, UnidashboardLocators.textbox_ageOfProgram_xpath).send_keys(age)
 
     def setSeason(self, season):
-        self.driver.find_element(By.XPATH, self.textbox_season_xpath).send_keys(season)
+        self.driver.find_element(By.XPATH, UnidashboardLocators.textbox_season_xpath).send_keys(season)
 
     def setProductType(self, producType):
-        self.driver.find_element(By.XPATH, self.droplist_productType_xpath).send_keys(producType)
+        self.driver.find_element(By.XPATH, UnidashboardLocators.droplist_productType_xpath).send_keys(producType)
         time.sleep(1)
         value_productType_xpath = "//div[contains(@class,'modal-row') and contains(.,'Product type')]//a"
         self.driver.find_element(By.XPATH, value_productType_xpath).click()
         time.sleep(1)
 
     def setDealType(self, dealType):
-        select = Select(self.driver.find_element(By.XPATH, self.droplist_dealType_xpath))
+        select = Select(self.driver.find_element(By.XPATH, UnidashboardLocators.droplist_dealType_xpath))
         select.select_by_visible_text(dealType)
 
     def setFinancialRelationship(self, financialRelationship):
-        self.driver.find_element(By.XPATH, self.droplist_financialRelationship_xpath).send_keys(financialRelationship)
+        self.driver.find_element(By.XPATH, UnidashboardLocators.droplist_financialRelationship_xpath).send_keys(financialRelationship)
         time.sleep(1)
         value_financialRelationship_xpath = "//div[contains(@class,'modal-row') and contains(.,'What is the financial relationship between the client and their farmers (program type)')]//a"
         self.driver.find_element(By.XPATH, value_financialRelationship_xpath).click()
         time.sleep(1)
 
     def setClientType(self, clientType):
-        self.driver.find_element(By.XPATH, self.droplist_clientType_xpath).send_keys(clientType)
+        self.driver.find_element(By.XPATH, UnidashboardLocators.droplist_clientType_xpath).send_keys(clientType)
         time.sleep(1)
         value_clientType_xpath = "//div[contains(@class,'modal-row') and contains(.,'Client type')]//a//span"
         self.driver.find_element(By.XPATH, value_clientType_xpath).click()
         time.sleep(1)
 
     def setSector(self, sector):
-        select = Select(self.driver.find_element(By.XPATH, self.droplist_sector_xpath))
+        select = Select(self.driver.find_element(By.XPATH, UnidashboardLocators.droplist_sector_xpath))
         select.select_by_visible_text(sector)
 
     def setClientInsurance(self, clientInsurance):
-        self.driver.find_element(By.XPATH, self.textbox_clientInsurance_xpath).send_keys(clientInsurance)
+        self.driver.find_element(By.XPATH, UnidashboardLocators.textbox_clientInsurance_xpath).send_keys(clientInsurance)
 
     def setDecisionMaker(self, name, title, role, email, phoneNumber):
-        self.driver.find_element(By.XPATH, self.button_addDecisionMaker_xpath).click()
+        self.driver.find_element(By.XPATH, UnidashboardLocators.button_addDecisionMaker_xpath).click()
         time.sleep(1)
         textbox_name_xpath = "//div[contains(@class,'modal-card') and contains(.,'Key decision-maker contact details')]//input[contains(@placeholder,'Name')]"
         textbox_title_xpath = "//div[contains(@class,'modal-card') and contains(.,'Key decision-maker contact details')]//input[contains(@placeholder,'Title')]"
@@ -170,46 +171,46 @@ class UnidashboardPage:
         time.sleep(1)
 
     def clickSaveDicisionmaker(self):
-        self.driver.find_element(By.XPATH, self.button_SaveDecisionMaker_xpath).click()
+        self.driver.find_element(By.XPATH, UnidashboardLocators.button_SaveDecisionMaker_xpath).click()
 
     def setClientAndDealInfo(self, info):
-        self.driver.find_element(By.XPATH, self.textarea_clientAndDealInfo_xpath).send_keys(info)
+        self.driver.find_element(By.XPATH, UnidashboardLocators.textarea_clientAndDealInfo_xpath).send_keys(info)
 
     def setHypothesis(self, hypothesis):
-        self.driver.find_element(By.XPATH, self.droplist_hypothesis_xpath).send_keys(hypothesis)
+        self.driver.find_element(By.XPATH, UnidashboardLocators.droplist_hypothesis_xpath).send_keys(hypothesis)
         time.sleep(1)
         value_hypothesis_xpath = "//div[contains(@class,'modal-row') and contains(.,'Client pain points')]//a//span"
         self.driver.find_element(By.XPATH, value_hypothesis_xpath).click()
         time.sleep(1)
 
     def setCommercialFarm(self, commercialFarm):
-        select = Select(self.driver.find_element(By.XPATH, self.droplist_commercialfarm_xpath))
+        select = Select(self.driver.find_element(By.XPATH, UnidashboardLocators.droplist_commercialfarm_xpath))
         select.select_by_visible_text(commercialFarm)
 
     def setPulaValueIn2023inUSD(self, value):
-        self.driver.find_element(By.XPATH, self.textbox_pulaValueIn2023inUSD_xpath).send_keys(value)
+        self.driver.find_element(By.XPATH, UnidashboardLocators.textbox_pulaValueIn2023inUSD_xpath).send_keys(value)
 
     def setPulaValueAtScaleInUSD(self, value):
-        self.driver.find_element(By.XPATH, self.textbox_pulaValueAtScaleInUSD_xpath).send_keys(value)
+        self.driver.find_element(By.XPATH, UnidashboardLocators.textbox_pulaValueAtScaleInUSD_xpath).send_keys(value)
 
     def setPulaValueIn2024inUSD(self, value):
-        self.driver.find_element(By.XPATH, self.textbox_pulaValueIn2024inUSD_xpath).send_keys(value)
+        self.driver.find_element(By.XPATH, UnidashboardLocators.textbox_pulaValueIn2024inUSD_xpath).send_keys(value)
 
     def setProbabilityToWin(self, value):
-        self.driver.find_element(By.XPATH, self.textbox_probabilityToWin_xpath).send_keys(value)
+        self.driver.find_element(By.XPATH, UnidashboardLocators.textbox_probabilityToWin_xpath).send_keys(value)
 
     def setPulaValueCalculationDetails(self, details):
-        self.driver.find_element(By.XPATH, self.textarea_pulaValueCalculationDetails_xpath).send_keys(details)
+        self.driver.find_element(By.XPATH, UnidashboardLocators.textarea_pulaValueCalculationDetails_xpath).send_keys(details)
 
     def clickSave(self):
-        self.driver.find_element(By.XPATH, self.button_save_xpath).click()
+        self.driver.find_element(By.XPATH, UnidashboardLocators.button_save_xpath).click()
 
     def searchProject(self, projectName):
-        self.driver.find_element(By.XPATH, self.textbox_searchProject_xpath).send_keys(projectName)
+        self.driver.find_element(By.XPATH, UnidashboardLocators.textbox_searchProject_xpath).send_keys(projectName)
         time.sleep(3)
 
     def setPipeline(self, pipelineValue):
-        select = Select(self.driver.find_element(By.XPATH, self.droplist_pipeline_xpath))
+        select = Select(self.driver.find_element(By.XPATH, UnidashboardLocators.droplist_pipeline_xpath))
         select.select_by_value(pipelineValue)
 
     def getProjectName(self):
@@ -222,3 +223,21 @@ class UnidashboardPage:
             list_projectName.append((self.driver.find_element(By.XPATH, span_xpath).text).split(" | "))
         names = [x[0] for x in list_projectName]
         return names
+
+    def clickProject(self, projectNameTobeClicked):
+        tr_xpath = "//div[contains(@class,'unidashboard-projects')]//tbody//tr"
+        max = len(self.driver.find_elements(By.XPATH, tr_xpath))
+        print('max: ', max)
+        list_projectName = []
+        names = []
+        for i in range(0, max):
+            span_xpath = "//div[contains(@class,'unidashboard-projects')]//tbody//tr[" + str(
+                i + 1) + "]//span[contains(@class,'name')]"
+            list_projectName.append((self.driver.find_element(By.XPATH, span_xpath).text).split(" | "))
+            names = [x[0] for x in list_projectName]
+            print(list_projectName)
+            print(names)
+            if projectNameTobeClicked in names:
+                print("click")
+                self.driver.find_element(By.XPATH, span_xpath).click()
+
