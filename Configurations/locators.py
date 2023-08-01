@@ -34,3 +34,27 @@ class UnidashboardLocators:
     button_save_xpath = "//button[contains(@class,'button action-btn is-primary')]//span[contains(.,'Save')]"
     textbox_searchProject_xpath = "//section//input[contains(@placeholder,'Search for project')]"
     droplist_pipeline_xpath = "//div[contains(@class,'field pipeline')]//select"
+
+class ProjectDetail:
+    tab_projectDetail_xpath = "//a[contains(@id,'details-tab')]"
+
+    # Research stage
+    field_tsiType_xpath = "//div[contains(@class,'row-data') and contains(.,'TSI Type')]//div[contains(@class,'row-value')]"
+    droplist_tsiType_xpath = "//div[contains(@class,'row-data') and contains(.,'TSI Type')]//div[contains(@class,'row-value')]//select"
+    button_tsiType_save_xpath = "//div[contains(@class,'row-data') and contains(.,'TSI Type')]//div[contains(@class,'action-group')]//span[contains(.,'Save')]"
+    button_addDealChampion_xpath = "//div[contains(@class,'row-data') and contains(.,'Deal Champion')]//i"
+    textbox_dealChampion_Name_xpath = "//input[contains(@placeholder,'Enter Deal Champion name')]"
+    textbox_dealChampion_Title_xpath = "//input[contains(@placeholder,'Enter Deal Champion title')]"
+    textbox_dealChampion_Role_xpath = "//input[contains(@placeholder,'Enter Deal Champion role')]"
+    textbox_dealChampion_Email_xpath = "//input[contains(@placeholder,'Enter Deal Champion email address')]"
+    button_saveDealChampion_xpath = "//button[contains(.,'Save')]"
+    field_donorGrant_xpath = "//div[contains(@class,'row-data') and contains(.,'Is a donor/grant funding?')]//div[contains(@class,'row-value')]"
+    droplist_donorGrant_xpath = "//div[contains(@class,'row-data') and contains(.,'Is a donor/grant funding?')]//div[contains(@class,'row-value')]//select"
+    button_donorGrant_save_xpath = "//div[contains(@class,'row-data') and contains(.,'Is a donor/grant funding?')]//div[contains(@class,'action-group')]//span[contains(.,'Save')]"
+    field_meetingWithClient_xpath = "//div[contains(@class,'row-data') and contains(.,'Hold at least 1 meetings with the client (provide dates, locations, physical/virtual, meeting notes)')]//div[contains(@class,'row-value')]"
+    textarea_meetingWithClient_xpath = "//div[contains(@class,'row-data') and contains(.,'Hold at least 1 meetings with the client (provide dates, locations, physical/virtual, meeting notes)')]//div[contains(@class,'row-value')]//textarea"
+    button_meetingWithClient_save_xpath = "//div[contains(@class,'row-data') and contains(.,'Hold at least 1 meetings with the client (provide dates, locations, physical/virtual, meeting notes)')]//div[contains(@class,'action-group')]//span[contains(.,'Save')]"
+
+    # All phase
+    # phase_content_xpath = "//div[contains(@id,'"+phase+"')]//div[contains(@class,'row-value')]"
+    button_save_question_xpath = "//span[contains(@class,'icon has-text-success')]"

@@ -1,5 +1,5 @@
 class DataTestForTestAddNewproject:
-    projectName = "Chien test auto 5"
+    projectName = "Chien test auto 2"
     client = "MOA"
     country = "Vietnam"
     valueChain = "wheat"
@@ -28,3 +28,13 @@ class DataTestForTestAddNewproject:
     value4 = "40"
     details = "Good"
     pipelineValue = "commercial"
+
+class DataForProjectDetail:
+    tsiType = "Harvest Cover"
+    name = "Ngoc Chien"
+    title = "Test title"
+    role = "Admin"
+    email = "test@gmail.com"
+    donorGrant = "Grant"
+    meetingWithClient = "googlemeeting.com/123"
+    text = "test info"
