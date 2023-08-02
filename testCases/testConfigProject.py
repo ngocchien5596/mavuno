@@ -2,7 +2,7 @@ from pageObjects.LoginPage import Login
 from utilities.readPropertises import ReadConfig
 import time
 from pageObjects.Commercial.UnidashboardPage import UnidashboardPage
-from pageObjects.Commercial.ProjectDetailPage import ProjectDetailPage
+from pageObjects.Commercial.ProjectDetailPage import *
 from Configurations.dataTest import *
 class Test_ConfigProject:
 
@@ -10,7 +10,7 @@ class Test_ConfigProject:
     username = ReadConfig.getUserName()
     password = ReadConfig.getPassword()
 
-    def test_Add_ProjectDetails(self, setup):
+    def test_Add_ProjectDetail(self, setup):
         self.driver = setup
 
         # Login
@@ -30,48 +30,124 @@ class Test_ConfigProject:
 
         # Search for created project
         self.uni.searchProject(DataTestForTestAddNewproject.projectName)
+        # self.uni.searchProject("Chien test auto")
         self.uni.setPipeline(DataTestForTestAddNewproject.pipelineValue)
         time.sleep(7)
-        names = self.uni.getProjectName()
-        print(names)
+        # names = self.uni.getProjectName()
 
         # Click project
         self.uni.clickProject(DataTestForTestAddNewproject.projectName)
         time.sleep(3)
 
-        self.pd = ProjectDetailPage(self.driver)
-        time.sleep(3)
+        # self.uni.clickProject1()
+        # time.sleep(7)
 
-        # Fill for Research phase
-        self.pd.setTsiType(DataForProjectDetail.tsiType)
-        print('tsiType')
-        time.sleep(0.5)
-        self.pd.setDealChampion(DataForProjectDetail.name, DataForProjectDetail.title, DataForProjectDetail.role, DataForProjectDetail.email)
-        print('DealChampion')
-        time.sleep(0.5)
-        self.pd.setDonorGrant(DataForProjectDetail.donorGrant)
-        print('donorGrant')
-        time.sleep(0.5)
-        self.pd.setMeetingWithClient(DataForProjectDetail.meetingWithClient)
-        print('meetingWithClient')
-        time.sleep(0.5)
+        # self.pdd = ProjectDetail_detail(self.driver)
+        # time.sleep(3)
+        #
+        # # Fill for Research phase
+        # self.pdd.setTsiType(DataForProjectDetail.tsiType)
+        # print('tsiType')
+        # time.sleep(0.5)
+        # self.pdd.setDealChampion(DataForProjectDetail.name, DataForProjectDetail.title, DataForProjectDetail.role, DataForProjectDetail.email)
+        # print('DealChampion')
+        # time.sleep(0.5)
+        # self.pdd.setDonorGrant(DataForProjectDetail.donorGrant)
+        # print('donorGrant')
+        # time.sleep(0.5)
+        # self.pdd.setMeetingWithClient(DataForProjectDetail.meetingWithClient)
+        # print('meetingWithClient')
+        # time.sleep(0.5)
+        #
+        # # Fill answers for Identification phase
+        # numberOfQuestion = self.pdd.getLenOfPhaseQuestions("Identification")
+        # self.pdd.setAnswers("Identification", numberOfQuestion,DataForProjectDetail.text)
+        # time.sleep(3)
+        #
+        # # Fill answers for Engagement phase
+        # numberOfQuestion = self.pdd.getLenOfPhaseQuestions("Engagement")
+        # self.pdd.setAnswers1("Engagement", numberOfQuestion, DataForProjectDetail.text)
+        # time.sleep(10)
+        #
+        # # Fill answers for Budget Motivation phase
+        # numberOfQuestion = self.pdd.getLenOfPhaseQuestions("Budget Motivation")
+        # self.pdd.setAnswers("Budget Motivation", numberOfQuestion, DataForProjectDetail.text)
+        # time.sleep(3)
+        #
+        # # Fill answers for Qualifying phase
+        # numberOfQuestion = self.pdd.getLenOfPhaseQuestions("Qualifying")
+        # self.pdd.setAnswers("Qualifying", numberOfQuestion, DataForProjectDetail.text)
+        # time.sleep(3)
+        
+        # self.pda = ProjectDetail_actors(self.driver)
+        #
+        # # Click Actors tab
+        # self.pda.clickProjectActorsTab()
+        # time.sleep(1)
+        #
+        # # Select Field OPs Manager
+        # self.pda.setActors("Field OPs Manager", "kien1")
+        #
+        # # Select Project Configuration Lead
+        # self.pda.setActors("Project Configuration Lead", "fOpsConfiguration")
+        #
+        # # Select Data OPs Analyst
+        # self.pda.setActors("Data OPs Analyst", "DataOps")
+        #
+        # # Select Payout Actuary
+        # self.pda.setActors("Payout Actuary", "actuarial01")
+        #
+        # # Select Crop Development Analyst
+        # self.pda.setActors("Crop Development Analyst", "CropDevelopment1")
+        #
+        # # Select Call Center Agent
+        # self.pda.setActors("Call Center Agent", "CallCenterB")
 
-        # Fill answers for Identification phase
-        numberOfQuestion = self.pd.getLenOfPhaseQuestions("Identification")
-        self.pd.setAnswers("Identification", numberOfQuestion,DataForProjectDetail.text)
-        time.sleep(3)
 
-        # Fill answers for Engagement phase
-        numberOfQuestion = self.pd.getLenOfPhaseQuestions("Engagement")
-        self.pd.setAnswers1("Engagement", numberOfQuestion, DataForProjectDetail.text)
-        time.sleep(10)
+        self.mp = MovePhase(self.driver)
+        list_status = []
 
-        # Fill answers for Budget Motivation phase
-        numberOfQuestion = self.pd.getLenOfPhaseQuestions("Budget Motivation")
-        self.pd.setAnswers("Budget Motivation", numberOfQuestion, DataForProjectDetail.text)
-        time.sleep(3)
+        # Move to Identification phase
+        self.mp.hoverButtonActions()
+        time.sleep(2)
+        self.mp.movePhase("Move to Identification")
+        time.sleep(4)
+        # Check displaying Identification on the end of Project name on Project Detail
+        list_status.append(self.mp.checkMovementNextPhaseSuccess_OnProjectDetail("Identification"))
+        print(list_status)
+        time.sleep(2)
+        # Check displaying project on Identification tab
+        list_status.append(self.uni.checkMovementNextPhaseSuccess_OnUnidashboard("Identification"))
+        print(list_status)
+        time.sleep(2)
 
-        # Fill answers for Qualifying phase
-        numberOfQuestion = self.pd.getLenOfPhaseQuestions("Qualifying")
-        self.pd.setAnswers("Qualifying", numberOfQuestion, DataForProjectDetail.text)
-        time.sleep(3)
+        names = self.uni.getProjectName()
+        # Click project
+        self.uni.clickProject1(DataTestForTestAddNewproject.projectName, names)
+        time.sleep(5)
+
+        # Move to Engagement phase
+        self.mp.hoverButtonActions()
+        time.sleep(2)
+        self.mp.movePhase("Move to Engagement")
+        time.sleep(4)
+        # Check displaying Engagement on the end of Project name on Project Detail
+        list_status.append(self.mp.checkMovementNextPhaseSuccess_OnProjectDetail("Engagement"))
+        print(list_status)
+        time.sleep(2)
+        # Check displaying project on Engagement tab
+        list_status.append(self.uni.checkMovementNextPhaseSuccess_OnUnidashboard("Engagement"))
+        print(list_status)
+        time.sleep(2)
+
+        names = self.uni.getProjectName()
+        # Click project
+        self.uni.clickProject1(DataTestForTestAddNewproject.projectName, names)
+        time.sleep(5)
+
+        if "Fail" not in list_status:
+            assert True
+            self.driver.close()
+        else:
+            self.driver.close()
+            assert False

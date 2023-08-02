@@ -34,9 +34,12 @@ class UnidashboardLocators:
     button_save_xpath = "//button[contains(@class,'button action-btn is-primary')]//span[contains(.,'Save')]"
     textbox_searchProject_xpath = "//section//input[contains(@placeholder,'Search for project')]"
     droplist_pipeline_xpath = "//div[contains(@class,'field pipeline')]//select"
+    
 
 class ProjectDetail:
-    tab_projectDetail_xpath = "//a[contains(@id,'details-tab')]"
+
+# Tab Project Detail
+    tab_projectDetail_detail_xpath = "//a[contains(@id,'details-tab')]"
 
     # Research stage
     field_tsiType_xpath = "//div[contains(@class,'row-data') and contains(.,'TSI Type')]//div[contains(@class,'row-value')]"
@@ -58,3 +61,10 @@ class ProjectDetail:
     # All phase
     # phase_content_xpath = "//div[contains(@id,'"+phase+"')]//div[contains(@class,'row-value')]"
     button_save_question_xpath = "//span[contains(@class,'icon has-text-success')]"
+
+# Tab Project Actor
+
+    tab_projectDetail_actors_xpath = "//a[contains(@id,'projectActors-tab')]"
+
+# Move phase
+    button_actions_xpath = "//button[contains(@class,'button is-info') and contains(.,'Actions')]"

@@ -7,14 +7,14 @@ from Configurations.locators import *
 from selenium.webdriver.common.action_chains import ActionChains
 
 
-class ProjectDetailPage:
+class ProjectDetail_detail:
 
     # Research stage
     def __init__(self, driver):
         self.driver = driver
 
     def clickProjectDetailTab(self):
-        self.driver.find_element(By.XPATH, ProjectDetail.tab_projectDetail_xpath).click()
+        self.driver.find_element(By.XPATH, ProjectDetail.tab_projectDetail_detail_xpath).click()
 
     def setTsiType(self, tsiType):
         self.driver.find_element(By.XPATH, ProjectDetail.field_tsiType_xpath).click()
@@ -142,4 +142,44 @@ class ProjectDetailPage:
                 actions.perform()
                 time.sleep(2)
 
+class ProjectDetail_actors:
+    def __init__(self, driver):
+        self.driver = driver
 
+    def clickProjectActorsTab(self):
+        self.driver.find_element(By.XPATH, ProjectDetail.tab_projectDetail_actors_xpath).click()
+
+    def setActors(self, actorTitle, actorName):
+        field_actor_xpath = "//div[contains(@class,'row-data') and contains(.,'"+ actorTitle +"')]//div[contains(@class,'row-value')]"
+        actorName_xpath = "//div[contains(@class,'row-data') and contains(.,'"+ actorTitle +"')]//a[contains(@class,'dropdown-item')]//span[contains(.,'"+actorName+"')]"
+        self.driver.find_element(By.XPATH, field_actor_xpath).click()
+        time.sleep(0.5)
+        self.driver.find_element(By.XPATH, field_actor_xpath).click()
+        time.sleep(0.5)
+        action = ActionChains(self.driver)
+        action.send_keys(actorName)
+        time.sleep(0.5)
+        self.driver.find_element(By.XPATH, actorName_xpath).click()
+        time.sleep(0.5)
+        self.driver.find_element(By.XPATH, ProjectDetail.button_save_question_xpath).click()
+        time.sleep(0.5)
+
+class MovePhase:
+    def __init__(self, driver):
+        self.driver = driver
+
+    def hoverButtonActions(self):
+        self.driver.find_element(By.XPATH, ProjectDetail.button_actions_xpath).click()
+
+    def movePhase(self, phaseButtonText):
+        button_phaseTitle_xpath = "//div[contains(@class,'dropdown dropdown-menu-animation is-hoverable is-mobile-modal') and contains(.,'Actions')]//a[contains(.,'"+phaseButtonText+"')]"
+        self.driver.find_element(By.XPATH, button_phaseTitle_xpath).click()
+        time.sleep(1)
+        return phaseButtonText
+
+    def checkMovementNextPhaseSuccess_OnProjectDetail(self, phase):
+        label_phaseText_xpath = "//p[contains(@class,'modal-card-title')]//span[contains(.,'"+phase+"')]"
+        if self.driver.find_element(By.XPATH, label_phaseText_xpath):
+            return "Pass"
+        else:
+            return "Fail"

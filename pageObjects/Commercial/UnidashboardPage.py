@@ -3,6 +3,8 @@ import time
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
+
+from Configurations.dataTest import DataTestForTestAddNewproject
 from Configurations.locators import UnidashboardLocators
 
 
@@ -216,7 +218,6 @@ class UnidashboardPage:
     def getProjectName(self):
         tr_xpath = "//div[contains(@class,'unidashboard-projects')]//tbody//tr"
         max = len(self.driver.find_elements(By.XPATH, tr_xpath))
-        print('max: ', max)
         list_projectName = []
         for i in range(0, max):
             span_xpath = "//div[contains(@class,'unidashboard-projects')]//tbody//tr[" + str(i + 1) + "]//span[contains(@class,'name')]"
@@ -229,15 +230,42 @@ class UnidashboardPage:
         max = len(self.driver.find_elements(By.XPATH, tr_xpath))
         print('max: ', max)
         list_projectName = []
-        names = []
         for i in range(0, max):
-            span_xpath = "//div[contains(@class,'unidashboard-projects')]//tbody//tr[" + str(
-                i + 1) + "]//span[contains(@class,'name')]"
+            print(i+1)
+            span_xpath = "//div[contains(@class,'unidashboard-projects')]//tbody//tr[" + str(i + 1) + "]//span[contains(@class,'name')]"
             list_projectName.append((self.driver.find_element(By.XPATH, span_xpath).text).split(" | "))
             names = [x[0] for x in list_projectName]
             print(list_projectName)
             print(names)
             if projectNameTobeClicked in names:
-                print("click")
                 self.driver.find_element(By.XPATH, span_xpath).click()
+
+    def clickProject1(self, projectNameTobeClicked, names):
+        span_xpath = "//div[contains(@class,'unidashboard-projects')]//tbody//tr//span[contains(.,'"+projectNameTobeClicked+"')]"
+        if projectNameTobeClicked in names:
+            self.driver.find_element(By.XPATH, span_xpath).click()
+
+    def clickTab(self, tabName):
+        acquisition_tab_xpath = "//a[contains(@id,'Acquisition-tab')]"
+        tab_xpath = "//a[contains(@id,'"+tabName+"-tab')]"
+        element = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, acquisition_tab_xpath)))
+        element.click()
+        time.sleep(2)
+        element1 = WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, tab_xpath)))
+        element1.click()
+        time.sleep(2)
+
+    def checkMovementNextPhaseSuccess_OnUnidashboard(self, tabName):
+        self.clickUnidashboard()
+        time.sleep(7)
+        print("clicked Unidashboard")
+        self.clickTab(tabName)
+        print("clicked tab name")
+        time.sleep(5)
+        names = self.getProjectName()
+        # print(names)
+        if DataTestForTestAddNewproject.projectName in names:
+            return "Pass"
+        else:
+            return "Fail"
 
