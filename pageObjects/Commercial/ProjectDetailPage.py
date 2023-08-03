@@ -70,10 +70,11 @@ class ProjectDetail_detail:
 
     def setAnswers(self, phase, max, text):
         for i in range(0, max):
+            print(phase, max)
             element_xpath = "//div[contains(@id,'"+phase+"')]//div[contains(@class,'row-value')]"
             element = self.driver.find_elements(By.XPATH, element_xpath)[i]
             element.click()
-            print("Clicked")
+            print("Clicked",i)
             time.sleep(0.5)
             if element.find_elements(By.XPATH, './/select'):
                 print("droplist")
@@ -82,26 +83,13 @@ class ProjectDetail_detail:
                 select.select_by_index(1)
                 self.driver.find_element(By.XPATH, ProjectDetail.button_save_question_xpath).click()
                 time.sleep(2)
-            elif element.find_elements(By.XPATH, ".//div[contains(@class,'project-datepicker')]"):
-                print("date-picker")
-                datepicker_element = element_xpath + "//div[contains(@class,'datepicker control project-datepicker')]"
-                button_datePicker_nextPage_xpath = "//div[contains(@class,'row-value')]//div[contains(@class,'datepicker control project-datepicker')]//a[contains(@class,'pagination-next')]"
-                value_xpath = "//div[contains(@class,'row-value')]//div[contains(@class,'datepicker control project-datepicker')]//a[contains(@class,'datepicker-cell is-selectable')]//span[contains(.,'15')]"
-                actions = ActionChains(self.driver)
-                actions.click(on_element = element)
-                actions.perform()
-                time.sleep(0.5)
-                self.driver.find_element(By.XPATH, button_datePicker_nextPage_xpath).click()
-                time.sleep(0.5)
-                self.driver.find_element(By.XPATH, value_xpath).click()
-                time.sleep(0.5)
-                self.driver.find_element(By.XPATH, ProjectDetail.button_save_question_xpath).click()
-                time.sleep(0.5)
             else:
                 print("textbox")
                 actions = ActionChains(self.driver)
                 actions.send_keys(text)
+                time.sleep(0.5)
                 actions.perform()
+                time.sleep(0.5)
                 self.driver.find_element(By.XPATH, ProjectDetail.button_save_question_xpath).click()
                 time.sleep(2)
 
@@ -182,8 +170,18 @@ class MovePhase:
 
     def movePhase(self, phaseButtonText):
         button_phaseTitle_xpath = "//div[contains(@class,'dropdown dropdown-menu-animation is-hoverable is-mobile-modal') and contains(.,'Actions')]//a[contains(.,'"+phaseButtonText+"')]"
-        self.driver.find_element(By.XPATH, button_phaseTitle_xpath).click()
-        time.sleep(1)
+        if phaseButtonText == "Move to Qualifying":
+            button_save_xpath = "//footer[contains(@class,'modal-card-foot')]//span[contains(.,'Save')]"
+            self.driver.find_element(By.XPATH, button_phaseTitle_xpath).click()
+            time.sleep(1)
+            self.driver.find_element(By.XPATH, button_save_xpath).click()
+            time.sleep(3)
+        if phaseButtonText == "Create RFQ":
+            self.createRFQ()
+
+        else:
+            self.driver.find_element(By.XPATH, button_phaseTitle_xpath).click()
+            time.sleep(1)
         return phaseButtonText
 
     def checkMovementNextPhaseSuccess_OnProjectDetail(self, phase):
@@ -192,3 +190,7 @@ class MovePhase:
             return "Pass"
         else:
             return "Fail"
+
+    def createRFQ(self):
+        print("Open pie page")
+

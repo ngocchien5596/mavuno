@@ -45,19 +45,19 @@ class Test_ConfigProject:
         self.pdd = ProjectDetail_detail(self.driver)
         time.sleep(3)
 
-        # # Fill for Research phase
-        # self.pdd.setTsiType(DataForProjectDetail.tsiType)
-        # print('tsiType')
-        # time.sleep(0.5)
-        # self.pdd.setDealChampion(DataForProjectDetail.name, DataForProjectDetail.title, DataForProjectDetail.role, DataForProjectDetail.email)
-        # print('DealChampion')
-        # time.sleep(0.5)
-        # self.pdd.setDonorGrant(DataForProjectDetail.donorGrant)
-        # print('donorGrant')
-        # time.sleep(0.5)
-        # self.pdd.setMeetingWithClient(DataForProjectDetail.meetingWithClient)
-        # print('meetingWithClient')
-        # time.sleep(0.5)
+        # Fill for Research phase
+        self.pdd.setTsiType(DataForProjectDetail.tsiType)
+        print('tsiType')
+        time.sleep(0.5)
+        self.pdd.setDealChampion(DataForProjectDetail.name, DataForProjectDetail.title, DataForProjectDetail.role, DataForProjectDetail.email)
+        print('DealChampion')
+        time.sleep(0.5)
+        self.pdd.setDonorGrant(DataForProjectDetail.donorGrant)
+        print('donorGrant')
+        time.sleep(0.5)
+        self.pdd.setMeetingWithClient(DataForProjectDetail.meetingWithClient)
+        print('meetingWithClient')
+        time.sleep(0.5)
 
         # Fill answers for Identification phase
         numberOfQuestion = self.pdd.getLenOfPhaseQuestions("Identification")
@@ -81,10 +81,7 @@ class Test_ConfigProject:
         
         self.pda = ProjectDetail_actors(self.driver)
 
-        # # Scroll up
-        # self.pda.scrollToElememt(ProjectDetail.tab_projectDetail_actors_xpath)
-        # time.sleep(1)
-
+        # Scroll up
         self.driver.execute_script("window.scrollTo(0, 100)")
         self.driver.save_screenshot("./Screenshots/1.png")
 
@@ -151,6 +148,52 @@ class Test_ConfigProject:
         # Click project
         self.uni.clickProject1(DataTestForTestAddNewproject.projectName, names)
         time.sleep(5)
+
+        # Move to Budget Motivation phase
+        self.mp.hoverButtonActions()
+        time.sleep(2)
+        self.mp.movePhase("Move to Budget Motivation")
+        time.sleep(4)
+        # Check displaying Budget Motivation on the end of Project name on Project Detail
+        list_status.append(self.mp.checkMovementNextPhaseSuccess_OnProjectDetail("Budget Motivation"))
+        print(list_status)
+        time.sleep(2)
+        # Check displaying project on Budget Motivation tab
+        list_status.append(self.uni.checkMovementNextPhaseSuccess_OnUnidashboard("Budget Motivation"))
+        print(list_status)
+        time.sleep(2)
+
+        names = self.uni.getProjectName()
+        # Click project
+        self.uni.clickProject1(DataTestForTestAddNewproject.projectName, names)
+        time.sleep(5)
+
+        # Move to Qualifying phase
+        self.mp.hoverButtonActions()
+        time.sleep(2)
+        self.mp.movePhase("Move to Qualifying")
+        time.sleep(4)
+        # Check displaying Qualifying on the end of Project name on Project Detail
+        list_status.append(self.mp.checkMovementNextPhaseSuccess_OnProjectDetail("Qualifying"))
+        print(list_status)
+        time.sleep(2)
+        # Check displaying project on Qualifying tab
+        list_status.append(self.uni.checkMovementNextPhaseSuccess_OnUnidashboard("Qualifying"))
+        print(list_status)
+        time.sleep(2)
+
+        names = self.uni.getProjectName()
+        # Click project
+        self.uni.clickProject1(DataTestForTestAddNewproject.projectName, names)
+        time.sleep(5)
+
+        # Create RFQ
+        self.mp.hoverButtonActions()
+        time.sleep(2)
+        self.mp.movePhase("Create RFQ")
+        time.sleep(4)
+
+
 
         if "Fail" not in list_status:
             assert True
