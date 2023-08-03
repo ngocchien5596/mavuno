@@ -106,15 +106,30 @@ class ProjectDetail_detail:
                 time.sleep(2)
 
     def setAnswers1(self, phase, max, text):
-        for i in range(0, max-1):
+        for i in range(0, max):
+            print(phase, max)
             element_xpath = "//div[contains(@id,'"+phase+"')]//div[contains(@class,'row-value')]"
             element = self.driver.find_elements(By.XPATH, element_xpath)[i]
             actions = ActionChains(self.driver)
             actions.click(on_element=element)
             actions.perform()
-            print("Clicked")
+            print("Clicked", i)
             time.sleep(0.5)
-            if element.find_elements(By.XPATH, './/select'):
+            if element.find_elements(By.XPATH, ".//input[contains(@placeholder,'Click to select date')]"):
+                print("date-picker")
+                datepicker_element = element_xpath + "//div[contains(@class,'datepicker control project-datepicker')]//input"
+
+                button_datePicker_nextPage_xpath = "//div[contains(@class,'row-value')]//div[contains(@class,'datepicker control project-datepicker')]//a[contains(@class,'pagination-next')]"
+                value_xpath = "//div[contains(@class,'row-value')]//div[contains(@class,'datepicker control project-datepicker')]//a[contains(@class,'datepicker-cell is-selectable')]//span[contains(.,'15')]"
+                self.driver.find_element(By.XPATH, datepicker_element).click()
+                time.sleep(0.5)
+                self.driver.find_element(By.XPATH, button_datePicker_nextPage_xpath).click()
+                time.sleep(0.5)
+                self.driver.find_element(By.XPATH, value_xpath).click()
+                time.sleep(0.5)
+                self.driver.find_element(By.XPATH, ProjectDetail.button_save_question_xpath).click()
+                time.sleep(2)
+            elif element.find_elements(By.XPATH, './/select'):
                 print("droplist")
                 droplist_element = element_xpath + "//select"
                 select = Select(self.driver.find_element(By.XPATH, droplist_element))
@@ -123,18 +138,7 @@ class ProjectDetail_detail:
                 self.driver.find_element(By.XPATH, ProjectDetail.button_save_question_xpath).click()
                 print("Saved droplist")
                 time.sleep(2)
-            # elif element.find_elements(By.XPATH, ".//div[contains(@class,'datepicker control project-datepicker')]//input"):
-            #     print("date-picker")
-            #     datepicker_element = element_xpath + "//div[contains(@class,'datepicker control project-datepicker')]//input"
-            #
-            #     button_datePicker_nextPage_xpath = "//div[contains(@class,'row-value')]//div[contains(@class,'datepicker control project-datepicker')]//a[contains(@class,'pagination-next')]"
-            #     value_xpath = "//div[contains(@class,'row-value')]//div[contains(@class,'datepicker control project-datepicker')]//a[contains(@class,'datepicker-cell is-selectable')]//span[contains(.,'15')]"
-            #     self.driver.find_element(By.XPATH, datepicker_element).click()
-            #     time.sleep(0.5)
-            #     self.driver.find_element(By.XPATH, button_datePicker_nextPage_xpath).click()
-            #     time.sleep(0.5)
-            #     self.driver.find_element(By.XPATH, value_xpath).click()
-            #     time.sleep(0.5)
+
             else:
                 print("textbox")
                 actions = ActionChains(self.driver)
@@ -145,6 +149,11 @@ class ProjectDetail_detail:
 class ProjectDetail_actors:
     def __init__(self, driver):
         self.driver = driver
+
+    def scrollToElememt(self, element):
+        action = ActionChains(self.driver)
+        action.move_to_element(element)
+        action.perform()
 
     def clickProjectActorsTab(self):
         self.driver.find_element(By.XPATH, ProjectDetail.tab_projectDetail_actors_xpath).click()

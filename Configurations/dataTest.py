@@ -1,5 +1,5 @@
 class DataTestForTestAddNewproject:
-    projectName = "Chien test auto 2"
+    projectName = "Chien test auto 1"
     client = "MOA"
     country = "Vietnam"
     valueChain = "wheat"

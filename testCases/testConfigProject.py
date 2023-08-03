@@ -42,9 +42,9 @@ class Test_ConfigProject:
         # self.uni.clickProject1()
         # time.sleep(7)
 
-        # self.pdd = ProjectDetail_detail(self.driver)
-        # time.sleep(3)
-        #
+        self.pdd = ProjectDetail_detail(self.driver)
+        time.sleep(3)
+
         # # Fill for Research phase
         # self.pdd.setTsiType(DataForProjectDetail.tsiType)
         # print('tsiType')
@@ -58,50 +58,57 @@ class Test_ConfigProject:
         # self.pdd.setMeetingWithClient(DataForProjectDetail.meetingWithClient)
         # print('meetingWithClient')
         # time.sleep(0.5)
-        #
-        # # Fill answers for Identification phase
-        # numberOfQuestion = self.pdd.getLenOfPhaseQuestions("Identification")
-        # self.pdd.setAnswers("Identification", numberOfQuestion,DataForProjectDetail.text)
-        # time.sleep(3)
-        #
-        # # Fill answers for Engagement phase
-        # numberOfQuestion = self.pdd.getLenOfPhaseQuestions("Engagement")
-        # self.pdd.setAnswers1("Engagement", numberOfQuestion, DataForProjectDetail.text)
-        # time.sleep(10)
-        #
-        # # Fill answers for Budget Motivation phase
-        # numberOfQuestion = self.pdd.getLenOfPhaseQuestions("Budget Motivation")
-        # self.pdd.setAnswers("Budget Motivation", numberOfQuestion, DataForProjectDetail.text)
-        # time.sleep(3)
-        #
-        # # Fill answers for Qualifying phase
-        # numberOfQuestion = self.pdd.getLenOfPhaseQuestions("Qualifying")
-        # self.pdd.setAnswers("Qualifying", numberOfQuestion, DataForProjectDetail.text)
-        # time.sleep(3)
+
+        # Fill answers for Identification phase
+        numberOfQuestion = self.pdd.getLenOfPhaseQuestions("Identification")
+        self.pdd.setAnswers("Identification", numberOfQuestion,DataForProjectDetail.text)
+        time.sleep(3)
+
+        # Fill answers for Engagement phase
+        numberOfQuestion = self.pdd.getLenOfPhaseQuestions("Engagement")
+        self.pdd.setAnswers1("Engagement", numberOfQuestion, DataForProjectDetail.text)
+        time.sleep(3)
+
+        # Fill answers for Budget Motivation phase
+        numberOfQuestion = self.pdd.getLenOfPhaseQuestions("Budget Motivation")
+        self.pdd.setAnswers("Budget Motivation", numberOfQuestion, DataForProjectDetail.text)
+        time.sleep(3)
+
+        # Fill answers for Qualifying phase
+        numberOfQuestion = self.pdd.getLenOfPhaseQuestions("Qualifying")
+        self.pdd.setAnswers("Qualifying", numberOfQuestion, DataForProjectDetail.text)
+        time.sleep(3)
         
-        # self.pda = ProjectDetail_actors(self.driver)
-        #
-        # # Click Actors tab
-        # self.pda.clickProjectActorsTab()
+        self.pda = ProjectDetail_actors(self.driver)
+
+        # # Scroll up
+        # self.pda.scrollToElememt(ProjectDetail.tab_projectDetail_actors_xpath)
         # time.sleep(1)
-        #
-        # # Select Field OPs Manager
-        # self.pda.setActors("Field OPs Manager", "kien1")
-        #
-        # # Select Project Configuration Lead
-        # self.pda.setActors("Project Configuration Lead", "fOpsConfiguration")
-        #
-        # # Select Data OPs Analyst
-        # self.pda.setActors("Data OPs Analyst", "DataOps")
-        #
-        # # Select Payout Actuary
-        # self.pda.setActors("Payout Actuary", "actuarial01")
-        #
-        # # Select Crop Development Analyst
-        # self.pda.setActors("Crop Development Analyst", "CropDevelopment1")
-        #
-        # # Select Call Center Agent
-        # self.pda.setActors("Call Center Agent", "CallCenterB")
+
+        self.driver.execute_script("window.scrollTo(0, 100)")
+        self.driver.save_screenshot("./Screenshots/1.png")
+
+        # Click Actors tab
+        self.pda.clickProjectActorsTab()
+        time.sleep(1)
+
+        # Select Field OPs Manager
+        self.pda.setActors("Field OPs Manager", "kien1")
+
+        # Select Project Configuration Lead
+        self.pda.setActors("Project Configuration Lead", "fOpsConfiguration")
+
+        # Select Data OPs Analyst
+        self.pda.setActors("Data OPs Analyst", "DataOps")
+
+        # Select Payout Actuary
+        self.pda.setActors("Payout Actuary", "actuarial01")
+
+        # Select Crop Development Analyst
+        self.pda.setActors("Crop Development Analyst", "CropDevelopment1")
+
+        # Select Call Center Agent
+        self.pda.setActors("Call Center Agent", "CallCenterB")
 
 
         self.mp = MovePhase(self.driver)
