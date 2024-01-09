@@ -22,3 +22,8 @@
 2023-07-24 17:59:50,188 - root - INFO - test flow 2: Test clicking Login after filling all fields
 2023-07-25 15:21:12,609 - root - INFO - test flow 2: Test clicking Login after filling all fields
 2023-07-25 15:21:56,613 - root - INFO - test flow 2: Test clicking Login after filling all fields
+2024-01-09 11:34:45,139 - root - INFO - test text of title
+2024-01-09 11:34:47,771 - root - INFO - test font size of title
+2024-01-09 11:34:49,871 - root - INFO - test font of title
+2024-01-09 11:34:51,701 - root - INFO - test flow 1: Test clicking Login without filling all fields
+2024-01-09 11:34:59,809 - root - INFO - test flow 2: Test clicking Login after filling all fields
